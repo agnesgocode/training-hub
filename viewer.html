@@ -1,35 +1,24 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Materi — Training Hub EAC</title>
-  <link rel="stylesheet" href="assets/style.css">
+  <title>Material — Training Hub EAC</title>
+  <link rel="icon" type="image/png" href="assets/logo-ea.png">
+  <link rel="stylesheet" href="assets/style.css?v=6">
 </head>
 <body>
   <div class="app">
-    <aside class="sidebar">
-      <div class="logo-wrap"><img src="assets/logo-eac.png" alt="English Academy Center"></div>
-      <nav aria-label="Menu utama">
-        <div class="side-group">Menu</div>
-        <a class="side-link" href="index.html"><span class="ic" aria-hidden="true">◆</span> Beranda</a>
-        <a class="side-link" href="index.html#marketing"><span class="ic" aria-hidden="true">◆</span> Marketing</a>
-        <a class="side-link" href="index.html#akademik"><span class="ic" aria-hidden="true">◆</span> Akademik</a>
-        <a class="side-link" href="index.html#administration"><span class="ic" aria-hidden="true">◆</span> Administration</a>
-        <div class="side-group">Lainnya</div>
-        <a class="side-link" href="diagnostic.html"><span class="ic" aria-hidden="true">◆</span> Diagnostic Sheet</a>
-        <a class="side-link" href="resources.html"><span class="ic" aria-hidden="true">◆</span> Kelola Resource</a>
-      </nav>
-      <div class="side-foot">Training Hub internal EAC</div>
-    </aside>
+    <aside class="sidebar no-print" id="sidebar"></aside>
 
     <div class="content">
       <div class="panel">
-        <a class="back-link" href="index.html">← Kembali ke daftar materi</a>
+        <a class="back-link" href="index.html?view=learning">← Back to My Learning</a>
         <div class="viewer">
           <div class="viewer-bar">
-            <h2 id="viewer-title">Memuat…</h2>
-            <a id="open-external" class="btn ghost" target="_blank" rel="noopener" href="#">Buka di tab baru</a>
+            <h2 id="viewer-title">Loading…</h2>
+            <button type="button" id="mark-learned" class="btn small" hidden></button>
+            <a id="open-external" class="btn ghost" target="_blank" rel="noopener" href="#">Open in new tab</a>
           </div>
           <div id="viewer-frame"></div>
         </div>
@@ -39,8 +28,9 @@
 
   <footer class="site-footer">English Academy Center • Training Hub</footer>
 
-  <script src="data/resources.js"></script>
-  <script src="assets/app.js"></script>
+  <script src="data/resources.js?v=6"></script>
+  <script src="assets/app.js?v=6"></script>
+  <script src="assets/shell.js?v=6"></script>
   <script>renderViewer();</script>
 </body>
 </html>

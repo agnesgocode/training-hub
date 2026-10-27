@@ -1,32 +1,70 @@
 /* =========================================================================
-   PUSAT DATA TRAINING HUB
+   TRAINING HUB DATA CENTER
    -------------------------------------------------------------------------
-   HANYA FILE INI yang perlu Anda ubah kalau ada materi baru / update.
-   Anda TIDAK perlu menyentuh file desain (HTML/CSS) lainnya.
+   THIS IS THE ONLY FILE you need to edit when a material is added or updated.
+   You never need to touch the design files (HTML/CSS).
 
-   Cara menamb/mengubah materi:
-   1. Salin satu blok { ... } di bawah, tempel, lalu ubah isinya.
-   2. Field "type" menentukan bagaimana materi ditampilkan:
-        "gslides"  -> presentasi Google Slides (di-embed / bisa dibuka)
-        "gdrive"   -> file di Google Drive (PDF, dsb.)
-        "pdf"      -> file PDF yang Anda taruh di folder files/
-        "ppt"      -> file PowerPoint yang Anda taruh di folder files/
-        "link"     -> link biasa ke website lain
-        "page"     -> halaman khusus di web ini (mis. Diagnostic Sheet form)
-   3. "src" diisi:
-        - untuk gslides/gdrive/link -> URL-nya
-        - untuk pdf/ppt              -> nama file, contoh "files/payroll-mt.pdf"
-        - untuk page                 -> nama halaman internal, contoh "diagnostic"
-   4. "updated" = tanggal terakhir diubah (untuk info di web). Format bebas.
+   How to add / change a material:
+   1. Copy one { ... } block below, paste it, and change its contents.
+   2. Fields for each material:
+        id        -> unique name without spaces, e.g. "smartapp-teachers"
+        category  -> "marketing" | "academic" | "administration"
+        topic     -> group inside the category (see TOPICS below)
+        audience  -> who needs this material, one or more of:
+                     ["teacher", "mt", "mtc", "staff"]
+        tags      -> extra keywords so it is easy to find, e.g. ["payroll", "attendance"]
+        title     -> material title
+        desc      -> short description (1-2 sentences)
+        type      -> how the material is shown:
+                       "gslides" -> Google Slides presentation (shown on the site)
+                       "gdrive"  -> file on Google Drive (PDF, etc.)
+                       "pdf"     -> PDF placed in the files/ folder
+                       "ppt"     -> PowerPoint placed in the files/ folder
+                       "link"    -> plain link to another website
+                       "page"    -> a dedicated page on this site
+        src       -> for gslides/gdrive/link: the URL
+                     for pdf/ppt: the file name, e.g. "files/payroll-mt.pdf"
+                     for page: the page name, e.g. "diagnostic"
+                     (leave empty if the file is not ready -> shows "Coming soon")
+        updated   -> date of the last change, format YYYY-MM-DD (used by the
+                     "Recently updated" list)
+        public    -> (optional, gslides/gdrive only) set true ONLY when the Google
+                     file is shared as "Anyone with the link can view". With true the
+                     slides open directly on the site. Without it, users first see
+                     an "Open in Google / Download PDF" panel, so no flickering
+                     error screen appears.
 
-   CATATAN: agar Google Slides/Drive bisa tampil, di Google-nya set
-   "Anyone with the link can view".
+   Already have the PDF (e.g. after requesting access and downloading it)? Put it
+   in the files/ folder, then set type to "pdf" and src to "files/name.pdf".
+   A local PDF always opens directly on the site, no Google access needed.
+
+   To add a new GROUP: add one line to TOPICS.
+   To add a new CATEGORY: add one line to CATEGORIES (the badge colour for a
+   new category is set in assets/style.css).
    ========================================================================= */
 
 const CATEGORIES = [
-  { id: "marketing",      label: "Marketing",      icon: "📈" },
-  { id: "akademik",       label: "Akademik",       icon: "🎓" },
-  { id: "administration", label: "Administration", icon: "🗂️" },
+  { id: "academic",       label: "Academic",       icon: "🎓", desc: "Onboarding, SmartApp and the teacher code of conduct" },
+  { id: "marketing",      label: "Marketing",      icon: "📈", desc: "Sales guide and customer consultation tools" },
+  { id: "administration", label: "Administration", icon: "🗂️", desc: "Payroll, attendance and tracking" },
+];
+
+/* Groups inside a category. Order here = display order. */
+const TOPICS = [
+  { id: "onboarding", category: "academic",       label: "Onboarding" },
+  { id: "smartapp",   category: "academic",       label: "SmartApp" },
+  { id: "compliance", category: "academic",       label: "Compliance & Code of Conduct" },
+  { id: "sales",      category: "marketing",      label: "Sales & Consultation" },
+  { id: "payroll",    category: "administration", label: "Payroll & Attendance" },
+  { id: "tracking",   category: "administration", label: "Tracking & Productivity" },
+];
+
+/* Who the material is for. */
+const AUDIENCES = [
+  { id: "teacher", label: "Teacher" },
+  { id: "mt",      label: "MT Mitra" },
+  { id: "mtc",     label: "MT Coach" },
+  { id: "staff",   label: "Staff" },
 ];
 
 const RESOURCES = [
@@ -35,8 +73,11 @@ const RESOURCES = [
   {
     id: "sales-guide",
     category: "marketing",
+    topic: "sales",
+    audience: ["staff"],
+    tags: ["consultation", "customer", "walk-in", "ask listen dig deeper"],
     title: "Sales Guides and Tools",
-    desc: "Panduan menggali kebutuhan customer (ASK → LISTEN → DIG DEEPER): 8 point consultation flow untuk Walk-In / Phone / Chat, plus Sales Tools. Seluruh isi terintegrasi di web ini.",
+    desc: "A guide to uncovering customer needs (ASK → LISTEN → DIG DEEPER): an 8-point consultation flow for Walk-In / Phone / Chat, plus Sales Tools. All content is built into this site.",
     type: "page",
     src: "sales-guide",
     updated: "2026-09-17",
@@ -44,57 +85,75 @@ const RESOURCES = [
   {
     id: "diagnostic-sheet",
     category: "marketing",
-    title: "Diagnostic Sheet (isi & print)",
-    desc: "Worksheet 'My English Success Journey' versi web — bisa diisi langsung dan dicetak.",
+    topic: "sales",
+    audience: ["staff"],
+    tags: ["worksheet", "print", "my english success journey"],
+    title: "Diagnostic Sheet (fill in & print)",
+    desc: "The 'My English Success Journey' worksheet as a web version. Fill it in on screen and print it.",
     type: "page",
     src: "diagnostic",
     updated: "2026-09-17",
   },
 
-  /* ---------------- AKADEMIK ---------------- */
+  /* ---------------- ACADEMIC ---------------- */
   {
     id: "onboarding-mt",
-    category: "akademik",
-    title: "Onboarding MT (Master Teacher)",
-    desc: "Materi onboarding khusus untuk MT. (Bagian administrasi payroll & SCMS dipindah ke menu Administration.)",
+    category: "academic",
+    topic: "onboarding",
+    audience: ["mt"],
+    tags: ["master teacher", "onboarding"],
+    title: "MT Mitra Onboarding",
+    desc: "Onboarding material for MT Mitra. (The payroll and SCMS part has moved to the Administration menu.)",
     type: "gslides",
-    src: "", // <-- TEMPEL link Google Slides khusus MT di sini, atau upload PDF ke files/
+    src: "", // <-- PASTE the Google Slides link for MT Mitra here, or upload a PDF to files/
     updated: "",
-    placeholder: "Menunggu file dari pusat. Kirimkan slide/PDF untuk MT.",
+    placeholder: "Waiting for the file from head office. Please send the slides/PDF for MT Mitra.",
   },
   {
     id: "onboarding-mtc",
-    category: "akademik",
-    title: "Onboarding MT Coach",
-    desc: "Materi onboarding khusus untuk MT Coach.",
+    category: "academic",
+    topic: "onboarding",
+    audience: ["mtc"],
+    tags: ["coach", "onboarding"],
+    title: "MT Coach Onboarding",
+    desc: "Onboarding material for MT Coaches.",
     type: "gslides",
-    src: "", // <-- TEMPEL link Google Slides khusus MT Coach di sini, atau upload PDF
+    src: "", // <-- PASTE the Google Slides link for MT Coaches here, or upload a PDF
     updated: "",
-    placeholder: "Menunggu file dari pusat. Kirimkan slide/PDF untuk MT Coach.",
+    placeholder: "Waiting for the file from head office. Please send the slides/PDF for MT Coaches.",
   },
   {
     id: "smartapp-teachers",
-    category: "akademik",
+    category: "academic",
+    topic: "smartapp",
+    audience: ["teacher"],
+    tags: ["smartapp", "app", "guide"],
     title: "How to use SmartApp for Teachers",
-    desc: "Panduan penggunaan SmartApp untuk pengajar.",
+    desc: "A guide to using SmartApp for teachers.",
     type: "gslides",
     src: "https://docs.google.com/presentation/d/1zbK6JVv0bzix7nVML-a1TVtWFfIIvenPpxuZvu-lIB8/edit?usp=sharing",
     updated: "2026-09-17",
   },
   {
     id: "smartapp-staff",
-    category: "akademik",
+    category: "academic",
+    topic: "smartapp",
+    audience: ["staff"],
+    tags: ["smartapp", "app", "guide"],
     title: "How to use SmartApp for Staff",
-    desc: "Panduan penggunaan SmartApp untuk staff.",
+    desc: "A guide to using SmartApp for staff.",
     type: "gslides",
     src: "https://docs.google.com/presentation/d/1ZHqN9Yo-dlN3gJ29FkcwqOdM1me2hLQO/edit",
     updated: "2026-09-17",
   },
   {
-    id: "kode-etik",
-    category: "akademik",
-    title: "Kode Etik Pengajar",
-    desc: "Slide compliance & kode etik untuk pengajar.",
+    id: "code-of-conduct",
+    category: "academic",
+    topic: "compliance",
+    audience: ["teacher", "mt", "mtc"],
+    tags: ["compliance", "ethics", "rules"],
+    title: "Teacher Code of Conduct",
+    desc: "Compliance and code of conduct slides for teachers.",
     type: "link",
     src: "https://tinyurl.com/slidecompliancetraining",
     updated: "2026-09-17",
@@ -104,22 +163,28 @@ const RESOURCES = [
   {
     id: "payroll-mt",
     category: "administration",
-    title: "Payroll MT — Manual Attendance & SCMS",
-    desc: "Bagian manual attendance record dan SCMS (diambil dari materi Onboarding MT).",
+    topic: "payroll",
+    audience: ["mt"],
+    tags: ["payroll", "attendance", "scms", "salary"],
+    title: "MT Mitra Payroll — Manual Attendance & SCMS",
+    desc: "The manual attendance record and SCMS section (taken from the MT Mitra Onboarding material).",
     type: "gslides",
-    src: "", // <-- TEMPEL link slide bagian attendance & SCMS, atau upload PDF
+    src: "", // <-- PASTE the link to the attendance & SCMS slides here, or upload a PDF
     updated: "",
-    placeholder: "Menunggu file dari pusat. Kirimkan bagian Manual Attendance & SCMS.",
+    placeholder: "Waiting for the file from head office. Please send the Manual Attendance & SCMS section.",
   },
   {
     id: "mtc-tracker",
     category: "administration",
+    topic: "tracking",
+    audience: ["mtc"],
+    tags: ["productivity", "tracker"],
     title: "MTC Productivity Tracker",
-    desc: "Panduan MTC Productivity Tracker (diambil dari materi Onboarding MT).",
+    desc: "A guide to the MTC Productivity Tracker (taken from the MT Mitra Onboarding material).",
     type: "gslides",
-    src: "", // <-- TEMPEL link slide bagian MTC Productivity Tracker, atau upload PDF
+    src: "", // <-- PASTE the link to the MTC Productivity Tracker slides here, or upload a PDF
     updated: "",
-    placeholder: "Menunggu file dari pusat. Kirimkan bagian MTC Productivity Tracker.",
+    placeholder: "Waiting for the file from head office. Please send the MTC Productivity Tracker section.",
   },
 
 ];

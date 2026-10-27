@@ -4,30 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My English Success Journey — Diagnostic Sheet</title>
-  <link rel="stylesheet" href="assets/style.css">
-  <link rel="stylesheet" href="assets/diagnostic.css">
+  <link rel="icon" type="image/png" href="assets/logo-ea.png">
+  <link rel="stylesheet" href="assets/style.css?v=6">
+  <link rel="stylesheet" href="assets/diagnostic.css?v=6">
 </head>
 <body>
   <div class="app">
-    <aside class="sidebar no-print">
-      <div class="logo-wrap"><img src="assets/logo-eac.png" alt="English Academy Center"></div>
-      <nav aria-label="Menu utama">
-        <div class="side-group">Menu</div>
-        <a class="side-link" href="index.html"><span class="ic" aria-hidden="true">◆</span> Beranda</a>
-        <a class="side-link" href="index.html#marketing"><span class="ic" aria-hidden="true">◆</span> Marketing</a>
-        <a class="side-link" href="index.html#akademik"><span class="ic" aria-hidden="true">◆</span> Akademik</a>
-        <a class="side-link" href="index.html#administration"><span class="ic" aria-hidden="true">◆</span> Administration</a>
-        <div class="side-group">Lainnya</div>
-        <a class="side-link active" href="diagnostic.html"><span class="ic" aria-hidden="true">◆</span> Diagnostic Sheet</a>
-        <a class="side-link" href="resources.html"><span class="ic" aria-hidden="true">◆</span> Kelola Resource</a>
-      </nav>
-      <div class="side-foot">Training Hub internal EAC</div>
-    </aside>
+    <aside class="sidebar no-print" id="sidebar"></aside>
 
     <div class="content">
       <div class="toolbar no-print">
-        <button type="button" class="btn primary" onclick="window.print()">Print / Simpan sebagai PDF</button>
-        <button type="button" class="btn ghost" onclick="resetSheet()">Kosongkan isian</button>
+        <button type="button" class="btn primary" onclick="window.print()">Print / Save as PDF</button>
+        <button type="button" class="btn ghost" onclick="resetSheet()">Clear form</button>
         <span class="note" id="ds-note" role="status" aria-live="polite"></span>
       </div>
 
@@ -198,11 +186,14 @@
     </div>
   </div>
 
+  <script src="data/resources.js?v=6"></script>
+  <script src="assets/app.js?v=6"></script>
+  <script src="assets/shell.js?v=6"></script>
   <script>
     function resetSheet(){
-      if (confirm("Kosongkan semua isian?")) {
+      if (confirm("Clear all entries?")) {
         document.getElementById("ds-form").reset();
-        setNote("Isian dikosongkan.");
+        setNote("Form cleared.");
       }
     }
     function setNote(msg){

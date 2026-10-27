@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "python3 -u scripts/dev-server.py",
     "start": "python3 -u scripts/dev-server.py",
-    "preview": "python3 -u scripts/dev-server.py"
+    "preview": "python3 -u scripts/dev-server.py",
+    "knowledge": "python3 -u scripts/build-knowledge.py"
   },
   "license": "UNLICENSED"
 }

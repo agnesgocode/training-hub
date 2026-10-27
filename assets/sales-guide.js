@@ -58,7 +58,7 @@ function setChannel(id) {
 function renderSalesGuide() {
   if (typeof SG_POINTS === "undefined") {
     document.getElementById("sg-points").innerHTML =
-      `<div class="state error"><div class="big">⚠️</div>Konten sales guide gagal dimuat (data/sales-guide-data.js).</div>`;
+      `<div class="state error"><div class="big">⚠️</div>Sales guide content failed to load (data/sales-guide-data.js).</div>`;
     return;
   }
   document.getElementById("sg-eyebrow").textContent = SG_INTRO.eyebrow;
@@ -85,7 +85,7 @@ function renderSalesGuide() {
       <p>${sgEsc(t.desc)}</p>
       <div class="actions">
         <a class="btn primary" href="${sgEsc(t.url)}" ${t.internal ? "" : 'target="_blank" rel="noopener"'}>
-          ${t.internal ? "Buka di web ini" : "Buka di sumber"}
+          ${t.internal ? "Open in this web" : "Open at source"}
         </a>
       </div>
     </article>`).join("");

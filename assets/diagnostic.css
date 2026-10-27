@@ -1,6 +1,6 @@
-/* Diagnostic Sheet — meniru worksheet A4 "My English Success Journey".
-   Warna aksen dari identitas EAC (navy + merah-magenta), per blok diberi warna lembut
-   supaya lebih menarik namun tetap terbaca saat diprint. */
+/* Diagnostic Sheet — mimics the A4 worksheet "My English Success Journey".
+   Accent colours from the EAC identity (navy + red-magenta), each block given a soft colour
+   so it looks friendly yet stays readable when printed. */
 
 .toolbar { display:flex; gap:10px; margin-bottom:14px; flex-wrap:wrap; align-items:center; }
 .toolbar .note { color:var(--muted); font-size:.85rem; }

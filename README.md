@@ -1,24 +1,35 @@
 # Training Hub
 
-Website training statis (HTML/CSS/JS) — tanpa server, siap dipasang di **GitHub Pages**.
+A static training website (HTML/CSS/JS) — no server, ready to host on **GitHub Pages**.
 
-## Struktur
-- `index.html` — beranda, menampilkan semua materi per kategori (Marketing / Akademik / Administration).
-- `viewer.html` — menampilkan slide/PDF di dalam web.
-- `diagnostic.html` — Diagnostic Sheet yang bisa diisi & di-print.
-- `resources.html` — halaman **Kelola Resource** (status tiap materi + panduan update).
-- `data/resources.js` — **PUSAT DATA**. Hanya file ini yang perlu diubah saat ada materi baru / update.
-- `files/` — tempat menaruh file PDF / PPT.
-- `assets/` — style & logika (tidak perlu disentuh).
+## Structure
+- `index.html` — dashboard: category cards, filters (audience / topic / format), search, Card or List view, and "Recently updated".
+- `viewer.html` — displays slides/PDFs inside the web page.
+- `diagnostic.html` — a Diagnostic Sheet you can fill in and print.
+- `resources.html` — the **Manage Resources** page (status of each material + update guide).
+- `data/resources.js` — the **DATA HUB**. This is the only file you need to change when there's new material / an update.
+- `files/` — where you put the PDF / PPT files.
+- `assets/shell.js` — shared sidebar + the **Academic Assistant** (chat). The AI server settings are at the top of this file (`ASSISTANT_ENDPOINT`).
+- `assets/` — other styles & logic (no need to touch).
 
-## Cara update materi (tanpa coding)
-Buka `data/resources.js`, temukan materinya, lalu:
-- **Link / Google Slides / Drive** → tempel URL pada `src`. Set di Google: *Anyone with the link can view*.
-- **File PDF/PPT** → taruh file di `files/`, isi `src` (contoh `files/payroll-mt.pdf`) dan `type` (`"pdf"` / `"ppt"`).
-- Isi `updated` dengan tanggal.
+## How to update material (no coding)
+Open `data/resources.js`, find the material, then:
+- **Link / Google Slides / Drive** → paste the URL into `src`. In Google, set: *Anyone with the link can view*.
+- **PDF/PPT file** → put the file in `files/`, fill in `src` (e.g. `files/payroll-mt.pdf`) and `type` (`"pdf"` / `"ppt"`).
+- Fill in `topic` (group), `audience` (who needs it), `tags` (keywords), and `updated` (format `YYYY-MM-DD`).
+- New group: add one line to `TOPICS` in the same file.
 
-## Cara pasang di GitHub Pages
-1. Buat repository baru di GitHub, upload semua isi folder ini.
-2. Buka **Settings → Pages**.
-3. Bagian *Source*: pilih branch `main`, folder `/ (root)`, lalu **Save**.
-4. Tunggu 1–2 menit, GitHub memberi URL publik (mis. `https://namaanda.github.io/training-hub/`).
+## How to host on GitHub Pages
+1. Create a new repository on GitHub and upload everything in this folder.
+2. Open **Settings → Pages**.
+3. Under *Source*: choose branch `main`, folder `/ (root)`, then **Save**.
+4. Wait 1–2 minutes and GitHub gives you a public URL (e.g. `https://yourname.github.io/training-hub/`).
+
+
+## Learner dashboard, quizzes and resource links
+
+- **Who it is for:** MT Mitra and MT Coach. On first visit a learner enters a name and role; the dashboard then shows the materials, quizzes and goals meant for that role.
+- **Quizzes:** written in `data/quizzes.js` (`questions: []` = "Coming soon"). Passing a quiz marks its material as learned. A sample quiz built from the Sales Guide is included to try the flow.
+- **Resources menu:** links come from `data/links.js`, an optional shared Google Sheet (`LINKS_SHEET`, template in `data/links-sheet-template.csv`) and the "Add link" button (this device only).
+- **Where progress is stored:** in each learner's browser (`localStorage`). No server is needed, but a different device starts empty and the academic team cannot see progress yet. All access goes through `Store` in `assets/app.js`, so it can later be swapped for Supabase.
+- **AI assistant:** paused. `FEATURES.assistant` in `assets/app.js` is `false`; the code is kept in `assets/assistant.js`.

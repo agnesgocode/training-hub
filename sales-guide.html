@@ -1,32 +1,20 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sales Guides and Tools — Training Hub EAC</title>
-  <link rel="stylesheet" href="assets/style.css">
-  <link rel="stylesheet" href="assets/sales-guide.css">
+  <link rel="icon" type="image/png" href="assets/logo-ea.png">
+  <link rel="stylesheet" href="assets/style.css?v=6">
+  <link rel="stylesheet" href="assets/sales-guide.css?v=6">
 </head>
 <body>
   <div class="app">
-    <aside class="sidebar">
-      <div class="logo-wrap"><img src="assets/logo-eac.png" alt="English Academy Center"></div>
-      <nav aria-label="Menu utama">
-        <div class="side-group">Menu</div>
-        <a class="side-link" href="index.html"><span class="ic" aria-hidden="true">◆</span> Beranda</a>
-        <a class="side-link active" href="index.html#marketing"><span class="ic" aria-hidden="true">◆</span> Marketing</a>
-        <a class="side-link" href="index.html#akademik"><span class="ic" aria-hidden="true">◆</span> Akademik</a>
-        <a class="side-link" href="index.html#administration"><span class="ic" aria-hidden="true">◆</span> Administration</a>
-        <div class="side-group">Lainnya</div>
-        <a class="side-link" href="diagnostic.html"><span class="ic" aria-hidden="true">◆</span> Diagnostic Sheet</a>
-        <a class="side-link" href="resources.html"><span class="ic" aria-hidden="true">◆</span> Kelola Resource</a>
-      </nav>
-      <div class="side-foot">Training Hub internal EAC</div>
-    </aside>
+    <aside class="sidebar no-print" id="sidebar"></aside>
 
     <div class="content">
       <div class="panel">
-        <a class="back-link" href="index.html">← Kembali ke Beranda</a>
+        <a class="back-link" href="index.html">← Back to Home</a>
 
         <header class="sg-hero">
           <span class="sg-eyebrow" id="sg-eyebrow"></span>
@@ -37,24 +25,24 @@
 
         <div class="sg-principle" id="sg-principle"></div>
 
-        <!-- Channel switcher (berfungsi) -->
+        <!-- Channel switcher (functional) -->
         <section class="sg-channel">
           <h2>Select Sales Channel</h2>
           <div class="sg-channel-btns" id="sg-channels" role="tablist" aria-label="Sales channel"></div>
-          <p class="sg-active">Guidance aktif: <strong id="sg-active-label"></strong></p>
+          <p class="sg-active">Active guidance: <strong id="sg-active-label"></strong></p>
         </section>
 
         <!-- Consultation flow -->
         <section class="sg-flow-sec">
           <h2>Consultation Flow</h2>
-          <p class="sub">Semua 8 point otomatis mengikuti channel yang kamu pilih.</p>
+          <p class="sub">All 8 points automatically follow the channel you select.</p>
           <div id="sg-points"></div>
         </section>
 
         <!-- Sales tools -->
         <section class="sg-tools">
           <h2>Sales Tools</h2>
-          <p class="sub">Gunakan saat visual atau worksheet akan membuat konsultasi lebih mudah.</p>
+          <p class="sub">Use when a visual or worksheet will make the consultation easier.</p>
           <div class="grid" id="sg-tools"></div>
           <div class="sg-reminder" id="sg-reminder"></div>
         </section>
@@ -64,8 +52,11 @@
     </div>
   </div>
 
-  <script src="data/sales-guide-data.js"></script>
-  <script src="assets/sales-guide.js"></script>
+  <script src="data/resources.js?v=6"></script>
+  <script src="assets/app.js?v=6"></script>
+  <script src="assets/shell.js?v=6"></script>
+  <script src="data/sales-guide-data.js?v=6"></script>
+  <script src="assets/sales-guide.js?v=6"></script>
   <script>renderSalesGuide();</script>
 </body>
 </html>

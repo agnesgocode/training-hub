@@ -1,56 +1,39 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Training Hub — English Academy Center</title>
-  <link rel="stylesheet" href="assets/style.css">
+  <link rel="icon" type="image/png" href="assets/logo-ea.png">
+  <link rel="stylesheet" href="assets/style.css?v=6">
 </head>
-<body>
+<body class="fit">
   <div class="app">
-    <aside class="sidebar">
-      <div class="logo-wrap"><img src="assets/logo-eac.png" alt="English Academy Center"></div>
-
-      <nav aria-label="Menu utama">
-        <div class="side-group">Menu</div>
-        <a class="side-link active" href="index.html"><span class="ic" aria-hidden="true">◆</span> Beranda</a>
-        <a class="side-link" href="index.html#marketing"><span class="ic" aria-hidden="true">◆</span> Marketing</a>
-        <a class="side-link" href="index.html#akademik"><span class="ic" aria-hidden="true">◆</span> Akademik</a>
-        <a class="side-link" href="index.html#administration"><span class="ic" aria-hidden="true">◆</span> Administration</a>
-
-        <div class="side-group">Lainnya</div>
-        <a class="side-link" href="diagnostic.html"><span class="ic" aria-hidden="true">◆</span> Diagnostic Sheet</a>
-        <a class="side-link" href="resources.html"><span class="ic" aria-hidden="true">◆</span> Kelola Resource</a>
-      </nav>
-
-      <div class="side-foot">Training Hub internal EAC</div>
-    </aside>
+    <aside class="sidebar" id="sidebar"></aside>
 
     <div class="content">
       <div class="topbar">
         <label class="search">
-          <span class="ic" aria-hidden="true">🔎</span>
-          <input id="q" type="search" placeholder="Cari materi training…" aria-label="Cari materi training">
+          <span class="ic" aria-hidden="true"><svg class="svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></span>
+          <input id="q" type="search" placeholder="Search by title, topic or keyword…  (press / to search)" aria-label="Search training materials" autocomplete="off">
         </label>
+        <button type="button" class="profile-chip" id="profile-chip" aria-label="Your profile"></button>
       </div>
 
-      <div class="panel">
-        <div class="page-head">
-          <h1>Selamat datang di Training Hub</h1>
-          <p>Akses dan pahami semua materi training EAC di satu tempat, untuk trainer maupun trainee.</p>
-        </div>
-        <div id="home"></div>
-      </div>
+      <main class="panel">
+        <div id="home" class="view" aria-live="polite"></div>
+      </main>
     </div>
   </div>
 
   <footer class="site-footer">English Academy Center • Training Hub</footer>
 
-  <script src="data/resources.js"></script>
-  <script src="assets/app.js"></script>
-  <script>
-    renderHome("home");
-    wireSearch("q", "home");
-  </script>
+  <script src="data/resources.js?v=6"></script>
+  <script src="data/quizzes.js?v=6"></script>
+  <script src="data/links.js?v=6"></script>
+  <script src="assets/app.js?v=6"></script>
+  <script src="assets/shell.js?v=6"></script>
+  <script src="assets/learner.js?v=6"></script>
+  <script>Learner.init(); initHome("home", "q");</script>
 </body>
 </html>
