@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Materi — Training Hub EAC</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="logo-wrap"><img src="assets/logo-eac.png" alt="English Academy Center"></div>
+      <nav aria-label="Menu utama">
+        <div class="side-group">Menu</div>
+        <a class="side-link" href="index.html"><span class="ic" aria-hidden="true">◆</span> Beranda</a>
+        <a class="side-link" href="index.html#marketing"><span class="ic" aria-hidden="true">◆</span> Marketing</a>
+        <a class="side-link" href="index.html#akademik"><span class="ic" aria-hidden="true">◆</span> Akademik</a>
+        <a class="side-link" href="index.html#administration"><span class="ic" aria-hidden="true">◆</span> Administration</a>
+        <div class="side-group">Lainnya</div>
+        <a class="side-link" href="diagnostic.html"><span class="ic" aria-hidden="true">◆</span> Diagnostic Sheet</a>
+        <a class="side-link" href="resources.html"><span class="ic" aria-hidden="true">◆</span> Kelola Resource</a>
+      </nav>
+      <div class="side-foot">Training Hub internal EAC</div>
+    </aside>
+
+    <div class="content">
+      <div class="panel">
+        <a class="back-link" href="index.html">← Kembali ke daftar materi</a>
+        <div class="viewer">
+          <div class="viewer-bar">
+            <h2 id="viewer-title">Memuat…</h2>
+            <a id="open-external" class="btn ghost" target="_blank" rel="noopener" href="#">Buka di tab baru</a>
+          </div>
+          <div id="viewer-frame"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">English Academy Center • Training Hub</footer>
+
+  <script src="data/resources.js"></script>
+  <script src="assets/app.js"></script>
+  <script>renderViewer();</script>
+</body>
+</html>

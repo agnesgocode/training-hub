@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelola Resource — Training Hub EAC</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    table { width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+    th,td { text-align:left; padding:12px 14px; border-bottom:1px solid var(--line); font-size:.9rem; vertical-align:top; }
+    th { background:var(--navy-soft); font-size:.74rem; text-transform:uppercase; letter-spacing:.4px; color:var(--navy); font-weight:800; }
+    tr:last-child td { border-bottom:none; }
+    .status-ok  { color:var(--navy); font-weight:800; }
+    .status-wait{ color:var(--accent-b); font-weight:800; }
+    .how { background:var(--navy-soft); border-radius:12px; padding:20px 22px; margin-bottom:24px; }
+    .how h3 { margin-top:0; color:var(--navy-dark); }
+    .how code { background:#fff; padding:2px 6px; border-radius:5px; font-size:.85em; }
+    .how ol { padding-left:20px; margin-bottom:8px; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="logo-wrap"><img src="assets/logo-eac.png" alt="English Academy Center"></div>
+      <nav aria-label="Menu utama">
+        <div class="side-group">Menu</div>
+        <a class="side-link" href="index.html"><span class="ic" aria-hidden="true">◆</span> Beranda</a>
+        <a class="side-link" href="index.html#marketing"><span class="ic" aria-hidden="true">◆</span> Marketing</a>
+        <a class="side-link" href="index.html#akademik"><span class="ic" aria-hidden="true">◆</span> Akademik</a>
+        <a class="side-link" href="index.html#administration"><span class="ic" aria-hidden="true">◆</span> Administration</a>
+        <div class="side-group">Lainnya</div>
+        <a class="side-link" href="diagnostic.html"><span class="ic" aria-hidden="true">◆</span> Diagnostic Sheet</a>
+        <a class="side-link active" href="resources.html"><span class="ic" aria-hidden="true">◆</span> Kelola Resource</a>
+      </nav>
+      <div class="side-foot">Training Hub internal EAC</div>
+    </aside>
+
+    <div class="content">
+      <div class="panel">
+        <div class="page-head">
+          <h1>Kelola Resource</h1>
+          <p>Semua materi diatur dari satu file. Ubah di situ, seluruh web ikut ter-update.</p>
+        </div>
+
+        <div class="how">
+          <h3>Cara menambah atau mengubah materi</h3>
+          <ol>
+            <li>Buka file <code>data/resources.js</code>.</li>
+            <li><strong>Link, Google Slides, atau Drive</strong>: tempel URL pada field <code>src</code>. Set di Google: "Anyone with the link can view".</li>
+            <li><strong>File PDF/PPT</strong>: taruh file di folder <code>files/</code>, isi <code>src</code> (contoh <code>files/payroll-mt.pdf</code>) dan <code>type</code> (<code>"pdf"</code> atau <code>"ppt"</code>).</li>
+            <li>Isi <code>updated</code> dengan tanggal, simpan, lalu upload ke GitHub.</li>
+          </ol>
+          <p style="margin-bottom:0;color:var(--muted)">Materi tanpa file otomatis ditandai <span class="status-wait">Menunggu file</span> di web.</p>
+        </div>
+
+        <table>
+          <caption class="no-print" style="text-align:left;color:var(--muted);font-size:.82rem;padding-bottom:8px">Status seluruh materi</caption>
+          <thead><tr><th>Materi</th><th>Kategori</th><th>Tipe</th><th>Status</th><th>Diperbarui</th></tr></thead>
+          <tbody id="res-table"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">English Academy Center • Training Hub</footer>
+
+  <script src="data/resources.js"></script>
+  <script src="assets/app.js"></script>
+  <script>
+    (function(){
+      const TL = { gslides:"Google Slides", gdrive:"Google Drive", pdf:"PDF", ppt:"PowerPoint", link:"Link", page:"Halaman Web" };
+      const tb = document.getElementById("res-table");
+      if (typeof RESOURCES === "undefined" || !Array.isArray(RESOURCES)) {
+        tb.innerHTML = `<tr><td colspan="5">${'⚠️ Daftar materi gagal dimuat (data/resources.js).'}</td></tr>`;
+        return;
+      }
+      tb.innerHTML = RESOURCES.map(r => {
+        const cat = CATEGORIES.find(c => c.id === r.category);
+        const ready = r.type === "page" || (r.src && r.src.trim());
+        const status = ready ? '<span class="status-ok">✔ Tersedia</span>' : '<span class="status-wait">⏳ Menunggu file</span>';
+        return `<tr>
+          <td><strong>${esc(r.title)}</strong><br><span style="color:var(--muted);font-size:.82rem">${esc(r.desc||"")}</span></td>
+          <td>${esc(cat ? cat.label : r.category)}</td>
+          <td>${esc(TL[r.type]||r.type)}</td>
+          <td>${status}</td>
+          <td>${esc(r.updated || "—")}</td>
+        </tr>`;
+      }).join("");
+    })();
+  </script>
+</body>
+</html>

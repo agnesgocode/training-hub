@@ -1,0 +1,11 @@
+{
+  "name": "eac-training-hub",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Training Hub English Academy Center - wadah materi training untuk trainer dan trainee (static site, HTML/CSS/JS).",
+  "scripts": {
+    "start": "python3 -m http.server 8731 --bind 127.0.0.1",
+    "preview": "python3 -m http.server 8731 --bind 127.0.0.1"
+  },
+  "license": "UNLICENSED"
+}

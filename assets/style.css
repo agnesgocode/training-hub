@@ -1,0 +1,171 @@
+/* Training Hub — identitas English Academy Center.
+   Palet & mood diambil dari DESIGN.md (navy + aksen merah-magenta, font bulat Nunito). */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+
+:root {
+  --navy:        #2E2E81;   /* warna struktur utama */
+  --navy-dark:   #0D0A3B;   /* teks tegas, footer */
+  --navy-soft:   #EDEDF6;   /* area aktif / latar lembut */
+  --accent-a:    #D74652;   /* aksen merah  (gradient) */
+  --accent-b:    #8E3E6A;   /* aksen magenta (gradient) */
+  --page:        #F7F7FB;
+  --panel:       #FFFFFF;
+  --ink:         #23233A;   /* teks tubuh */
+  --muted:       #6C6C86;
+  --line:        #E4E4EF;
+  --marketing:      #2E2E81;
+  --akademik:       #574Fb0;
+  --administration: #8E3E6A;
+  --radius-lg: 18px;   /* panel */
+  --radius:    12px;   /* kartu */
+  --radius-sm: 8px;    /* tombol/input */
+  --shadow:  0 1px 3px rgba(13,10,59,.06);
+  --shadow-hover: 0 8px 22px rgba(46,46,129,.14);
+  --sidebar-w: 250px;
+  --focus: 0 0 0 3px rgba(215,70,82,.45);  /* cincin fokus keyboard (aksen) */
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: "Nunito", -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--page);
+  color: var(--ink);
+  line-height: 1.55;
+}
+a { color: var(--navy); }
+
+/* Fokus keyboard terlihat di SEMUA elemen interaktif (R-32) */
+a:focus-visible, button:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
+  outline: none; box-shadow: var(--focus); border-radius: var(--radius-sm);
+}
+
+/* ============ LAYOUT ============ */
+.app { display: flex; min-height: 100vh; padding: 14px; gap: 14px; }
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+  width: var(--sidebar-w); flex-shrink: 0;
+  background: var(--panel); border-radius: var(--radius-lg);
+  box-shadow: var(--shadow); padding: 20px 14px;
+  display: flex; flex-direction: column;
+  position: sticky; top: 14px; height: calc(100vh - 28px);
+}
+.logo-wrap { padding: 4px 8px 18px; border-bottom: 1px solid var(--line); margin-bottom: 10px; }
+.logo-wrap img { max-width: 100%; height: auto; display: block; }
+.side-group { font-size: .72rem; font-weight: 800; letter-spacing: .5px; color: var(--muted); text-transform: uppercase; margin: 16px 10px 6px; }
+.side-link {
+  display: flex; align-items: center; gap: 11px;
+  padding: 10px 12px; border-radius: 10px; text-decoration: none;
+  color: var(--muted); font-weight: 700; font-size: .94rem; margin-bottom: 2px;
+  position: relative;
+}
+.side-link .ic { width: 20px; text-align: center; flex-shrink: 0; color: var(--navy); }
+.side-link:hover { background: var(--navy-soft); color: var(--navy-dark); }
+.side-link.active { background: var(--navy-soft); color: var(--navy); }
+.side-link.active::before {
+  content:""; position:absolute; left:-14px; top:8px; bottom:8px; width:4px;
+  background: linear-gradient(180deg, var(--accent-a), var(--accent-b));
+  border-radius: 0 4px 4px 0;
+}
+.side-foot { margin-top: auto; padding: 12px 10px 2px; font-size: .78rem; color: var(--muted); border-top: 1px solid var(--line); }
+
+/* ---------- Content ---------- */
+.content { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 14px; }
+
+.topbar {
+  background: var(--panel); border-radius: var(--radius-lg); box-shadow: var(--shadow);
+  padding: 12px 18px; display: flex; align-items: center; gap: 12px;
+}
+/* Pencarian NYATA: input yang benar-benar memfilter kartu (R-26) */
+.search { flex: 1; display: flex; align-items: center; gap: 10px; background: var(--page); border-radius: 10px; padding: 4px 12px; }
+.search .ic { color: var(--muted); }
+.search input { flex:1; border: none; background: transparent; font-family: inherit; font-size: .95rem; padding: 8px 0; color: var(--ink); }
+.search input::placeholder { color: var(--muted); }
+
+.panel { background: var(--panel); border-radius: var(--radius-lg); box-shadow: var(--shadow); padding: 24px 24px 30px; flex: 1; }
+.page-head h1 { margin: 0 0 4px; font-size: 1.8rem; color: var(--navy-dark); font-weight: 800; }
+.page-head p  { margin: 0; color: var(--muted); }
+
+/* ---------- Sections ---------- */
+.section-title { display: flex; align-items: center; gap: 10px; font-size: 1.1rem; margin: 28px 0 14px; color: var(--navy-dark); }
+.section-title:first-of-type { margin-top: 20px; }
+.badge {
+  font-size: .7rem; font-weight: 800; text-transform: uppercase; letter-spacing: .5px;
+  padding: 4px 11px; border-radius: 8px; color: #fff;
+}
+.badge.marketing      { background: var(--marketing); }
+.badge.akademik       { background: var(--akademik); }
+.badge.administration { background: var(--administration); }
+
+/* ---------- Cards ---------- */
+.grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); }
+.card {
+  background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 20px; box-shadow: var(--shadow); display: flex; flex-direction: column;
+  transition: transform .15s, box-shadow .15s, border-color .15s;
+}
+.card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); border-color: #d6d6ea; }
+.card h3 { margin: 0 0 8px; font-size: 1.05rem; color: var(--navy-dark); font-weight: 800; }
+.card p  { margin: 0 0 14px; color: var(--muted); font-size: .92rem; flex: 1; }
+.card .meta { font-size: .78rem; color: var(--muted); margin-bottom: 12px; }
+.card .type-tag {
+  align-self: flex-start; font-size: .7rem; font-weight: 800; padding: 3px 9px;
+  border-radius: 6px; background: var(--navy-soft); color: var(--navy);
+  margin-bottom: 12px; text-transform: uppercase; letter-spacing: .4px;
+}
+.card .actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.btn {
+  display: inline-block; padding: 9px 16px; border-radius: var(--radius-sm);
+  font-family: inherit; font-weight: 700; font-size: .88rem; text-decoration: none; cursor: pointer;
+  border: 1.5px solid var(--navy); color: var(--navy); background: #fff;
+  transition: background .12s, color .12s;
+}
+.btn:hover { background: var(--navy); color: #fff; }
+/* tombol aksi UTAMA = satu momen aksen per kartu (gradient logo) */
+.btn.primary { background: linear-gradient(135deg, var(--accent-a), var(--accent-b)); color: #fff; border: none; }
+.btn.primary:hover { filter: brightness(1.06); }
+.btn.ghost { border-color: var(--line); color: var(--muted); }
+.btn.ghost:hover { background: var(--page); color: var(--navy-dark); border-color: #d6d6ea; }
+
+.pending {
+  font-size: .84rem; color: var(--accent-b);
+  background: #fdeef2; border: 1px dashed var(--accent-b);
+  padding: 8px 10px; border-radius: var(--radius-sm); margin-bottom: 12px;
+}
+
+/* ---------- UI states (R-27) ---------- */
+.state { text-align: center; padding: 46px 20px; color: var(--muted); }
+.state .big { font-size: 1.6rem; margin-bottom: 6px; }
+.state.error { color: var(--accent-a); }
+
+/* ---------- Viewer ---------- */
+.viewer { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); margin-top: 8px; }
+.viewer-bar { display: flex; align-items: center; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+.viewer-bar h2 { margin: 0; font-size: 1.05rem; flex: 1; color: var(--navy-dark); }
+.viewer iframe { width: 100%; height: 72vh; border: 0; display: block; }
+.back-link { display: inline-block; margin-bottom: 14px; font-weight: 700; text-decoration: none; color: var(--navy); }
+
+/* ---------- Footer ---------- */
+.site-footer { text-align: center; color: var(--muted); font-size: .85rem; padding: 20px; }
+
+/* ---------- Print ---------- */
+@media print {
+  .sidebar, .topbar, .site-footer, .no-print { display: none !important; }
+  .app { padding: 0; } .panel { box-shadow: none; }
+  body { background: #fff; }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  .app { flex-direction: column; padding: 10px; }
+  .sidebar { width: auto; height: auto; position: static; }
+  .logo-wrap { border-bottom: none; margin-bottom: 4px; padding-bottom: 8px; }
+  .logo-wrap img { max-width: 220px; }
+  .side-foot { display: none; }
+  .page-head h1 { font-size: 1.5rem; }
+}

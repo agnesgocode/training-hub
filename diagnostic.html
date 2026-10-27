@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My English Success Journey — Diagnostic Sheet</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/diagnostic.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar no-print">
+      <div class="logo-wrap"><img src="assets/logo-eac.png" alt="English Academy Center"></div>
+      <nav aria-label="Menu utama">
+        <div class="side-group">Menu</div>
+        <a class="side-link" href="index.html"><span class="ic" aria-hidden="true">◆</span> Beranda</a>
+        <a class="side-link" href="index.html#marketing"><span class="ic" aria-hidden="true">◆</span> Marketing</a>
+        <a class="side-link" href="index.html#akademik"><span class="ic" aria-hidden="true">◆</span> Akademik</a>
+        <a class="side-link" href="index.html#administration"><span class="ic" aria-hidden="true">◆</span> Administration</a>
+        <div class="side-group">Lainnya</div>
+        <a class="side-link active" href="diagnostic.html"><span class="ic" aria-hidden="true">◆</span> Diagnostic Sheet</a>
+        <a class="side-link" href="resources.html"><span class="ic" aria-hidden="true">◆</span> Kelola Resource</a>
+      </nav>
+      <div class="side-foot">Training Hub internal EAC</div>
+    </aside>
+
+    <div class="content">
+      <div class="toolbar no-print">
+        <button type="button" class="btn primary" onclick="window.print()">Print / Simpan sebagai PDF</button>
+        <button type="button" class="btn ghost" onclick="resetSheet()">Kosongkan isian</button>
+        <span class="note" id="ds-note" role="status" aria-live="polite"></span>
+      </div>
+
+      <!-- ===== A4 SHEET ===== -->
+      <form class="sheet" id="ds-form">
+        <!-- Header -->
+        <header class="ds-head">
+          <div class="ds-brand-left">Ruang<br>guru</div>
+          <div class="ds-title">
+            <h1>MY ENGLISH<br>SUCCESS JOURNEY</h1>
+            <p>Let's discover the best learning journey for your future.</p>
+          </div>
+          <img class="ds-brand-right" src="assets/logo-eac.png" alt="English Academy Center">
+        </header>
+
+        <!-- Identity -->
+        <section class="ds-identity">
+          <label>Name: <input type="text"></label>
+          <label>Date: <input type="date"></label>
+          <label>Age: <input type="text"></label>
+          <label>Advisor: <input type="text"></label>
+          <label class="wide">School / Profession: <input type="text"></label>
+        </section>
+
+        <!-- Row 1: blocks 1-3 -->
+        <div class="ds-row ds-row-3">
+          <section class="ds-block b-why">
+            <h2><span class="num">1</span> WHY DO YOU WANT TO LEARN ENGLISH?</h2>
+            <div class="checks">
+              <label><input type="checkbox"> Speak more confidently</label>
+              <label><input type="checkbox"> Improve school performance</label>
+              <label><input type="checkbox"> Prepare for Cambridge</label>
+              <label><input type="checkbox"> Prepare for IELTS</label>
+              <label><input type="checkbox"> Study abroad</label>
+              <label><input type="checkbox"> Get a better career</label>
+              <label><input type="checkbox"> Make international friends</label>
+              <label><input type="checkbox"> Enjoy movies &amp; books</label>
+              <label class="other"><input type="checkbox"> Other: <input type="text" class="inline"></label>
+            </div>
+          </section>
+
+          <section class="ds-block b-challenge">
+            <h2><span class="num">2</span> WHAT IS YOUR BIGGEST CHALLENGE?</h2>
+            <div class="checks">
+              <label><input type="checkbox"> Afraid to speak</label>
+              <label><input type="checkbox"> Limited vocabulary</label>
+              <label><input type="checkbox"> Grammar confusion</label>
+              <label><input type="checkbox"> Pronunciation</label>
+              <label><input type="checkbox"> Listening</label>
+              <label><input type="checkbox"> Reading</label>
+              <label><input type="checkbox"> Writing</label>
+              <label><input type="checkbox"> Confidence</label>
+              <label><input type="checkbox"> Lack of practice</label>
+              <label class="other"><input type="checkbox"> Other: <input type="text" class="inline"></label>
+            </div>
+          </section>
+
+          <section class="ds-block b-use">
+            <h2><span class="num">3</span> HOW DO YOU CURRENTLY USE ENGLISH?</h2>
+            <p class="sub">Where do you use English in your daily life?</p>
+            <div class="checks two-col">
+              <label><input type="checkbox"> At School</label>
+              <label><input type="checkbox"> At Home</label>
+              <label><input type="checkbox"> With Friends</label>
+              <label><input type="checkbox"> Watching Movies / YouTube</label>
+              <label><input type="checkbox"> Playing Games</label>
+              <label><input type="checkbox"> Social Media</label>
+              <label><input type="checkbox"> Reading</label>
+              <label><input type="checkbox"> Writing / Chatting</label>
+              <label><input type="checkbox"> Talking with Foreigners</label>
+              <label><input type="checkbox"> Travel</label>
+              <label><input type="checkbox"> Work / Business</label>
+            </div>
+            <p class="sub">How Often Do You Use English?</p>
+            <div class="checks two-col">
+              <label><input type="checkbox"> Rarely</label>
+              <label><input type="checkbox"> Sometimes</label>
+              <label><input type="checkbox"> Often</label>
+              <label><input type="checkbox"> Almost Every Day</label>
+            </div>
+          </section>
+        </div>
+
+        <!-- Block 4 -->
+        <section class="ds-block b-learn">
+          <h2><span class="num">4</span> HOW DO YOU LIKE TO LEARN?</h2>
+          <div class="learn-grid">
+            <label><input type="checkbox"><span>Interactive</span></label>
+            <label><input type="checkbox"><span>Speaking Practice</span></label>
+            <label><input type="checkbox"><span>Project Based</span></label>
+            <label><input type="checkbox"><span>Discussion</span></label>
+            <label><input type="checkbox"><span>Presentation</span></label>
+            <label><input type="checkbox"><span>Visual Learning</span></label>
+            <label><input type="checkbox"><span>Reading</span></label>
+            <label><input type="checkbox"><span>Writing</span></label>
+            <label><input type="checkbox"><span>Mixed Activities</span></label>
+          </div>
+        </section>
+
+        <!-- Block 5 -->
+        <div class="ds-row ds-row-cefr">
+          <section class="ds-block b-cefr">
+            <h2><span class="num">5</span> YOUR ENGLISH JOURNEY (CEFR LEVELS)</h2>
+            <div class="cefr-track">
+              <div class="cefr"><b>Pre A1</b><small>Beginner</small></div>
+              <div class="cefr"><b>A1</b><small>Basic User</small></div>
+              <div class="cefr"><b>A2</b><small>Elementary</small></div>
+              <div class="cefr"><b>B1</b><small>Independent User</small></div>
+              <div class="cefr"><b>B2</b><small>Upper Independent</small></div>
+              <div class="cefr"><b>C1</b><small>Advanced User</small></div>
+            </div>
+            <label class="cefr-note"><input type="checkbox"> Your Placement Test will help us identify the most suitable starting level for you.</label>
+          </section>
+
+          <aside class="ds-block b-today">
+            <h3>TODAY</h3>
+            <ol class="today-steps">
+              <li>PLACEMENT TEST</li>
+              <li>FIND YOUR CEFR LEVEL</li>
+              <li>PERSONALIZED LEARNING PLAN</li>
+              <li>ACHIEVE YOUR GOAL</li>
+            </ol>
+          </aside>
+        </div>
+
+        <!-- Row: blocks 6 & 7 -->
+        <div class="ds-row ds-row-67">
+          <section class="ds-block b-target">
+            <h2><span class="num">6</span> YOUR SUCCESS TARGET</h2>
+            <p class="sub">Target Timeline</p>
+            <div class="checks">
+              <label><input type="checkbox"> 6 Months</label>
+              <label><input type="checkbox"> 9 Months</label>
+              <label><input type="checkbox"> 12 Months</label>
+            </div>
+          </section>
+
+          <section class="ds-block b-schedule">
+            <h2><span class="num">7</span> POSSIBLE SCHEDULE</h2>
+            <p class="sub">Which days are possible for your English class?</p>
+            <div class="checks two-col">
+              <label><input type="checkbox"> Monday</label>
+              <label><input type="checkbox"> Tuesday</label>
+              <label><input type="checkbox"> Wednesday</label>
+              <label><input type="checkbox"> Thursday</label>
+              <label><input type="checkbox"> Friday</label>
+              <label><input type="checkbox"> Saturday</label>
+            </div>
+            <label class="block-input">Other Activities / Extracurriculars:
+              <input type="text">
+            </label>
+          </section>
+        </div>
+
+        <!-- Block 8 -->
+        <section class="ds-block b-notes">
+          <h2><span class="num">8</span> CONSULTATION NOTES (FOR ADVISOR)</h2>
+          <textarea rows="3"></textarea>
+        </section>
+
+        <!-- Footer -->
+        <footer class="ds-foot">
+          <div>★ Every journey starts with one simple step.</div>
+          <div class="ds-foot-mid">WE'RE HERE TO HELP YOU REACH YOUR DREAM!</div>
+          <div>Let's start your English success journey together! ✈</div>
+        </footer>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function resetSheet(){
+      if (confirm("Kosongkan semua isian?")) {
+        document.getElementById("ds-form").reset();
+        setNote("Isian dikosongkan.");
+      }
+    }
+    function setNote(msg){
+      const n = document.getElementById("ds-note");
+      n.textContent = msg;
+      clearTimeout(n._t); n._t = setTimeout(() => n.textContent = "", 2500);
+    }
+  </script>
+</body>
+</html>

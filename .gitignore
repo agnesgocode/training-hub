@@ -1,0 +1,12 @@
+# Dependencies (tidak dipakai untuk situs statis ini, tapi aman untuk disaring)
+node_modules/
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+
+# Log / sementara
+*.log
