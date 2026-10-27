@@ -31,6 +31,13 @@ const LINKS_SHEET = {
 
 const LINKS = [
   {
+    title: "SCMS (Super CMS)",
+    url: "https://super-cms.ruangguru.com/englishacademy",
+    category: "Tools",
+    desc: "English Academy on Super CMS.",
+    audience: [],
+  },
+  {
     title: "CEFR Guide",
     url: "https://cefr-eac-banten.netlify.app/",
     category: "Tools",
@@ -44,4 +51,28 @@ const LINKS = [
     desc: "Compliance and code of conduct slides for teachers.",
     audience: ["teacher", "mt", "mtc"],
   },
+
+  /* ---- SmartApp: links taken from the EA SmartApp manual book and the troubleshooting deck ---- */
+  { title: "Tutorial EA Interactive SmartApp", url: "https://tinyurl.com/Tutorial-EA-Smart-App", category: "SmartApp",
+    desc: "Deck: how to use the EA Interactive SmartApp.", audience: ["teacher"] },
+  { title: "Technical & Pedagogical Feature Training to Teacher", url: "https://tinyurl.com/Pedagogical-Feature-Training", category: "SmartApp",
+    desc: "Deck: the technical and pedagogical features of SmartApp.", audience: ["teacher"] },
+  { title: "SCMS Login: how to choose the book on SCMS", url: "https://tinyurl.com/Book-Choosing-on-SCMS", category: "SmartApp",
+    desc: "Deck: logging in to SCMS and choosing the book.", audience: ["teacher"] },
+  { title: "EA App Variant (SmartApp activity types)", url: "https://tinyurl.com/EA-App-Variant", category: "SmartApp",
+    desc: "Deck: the types of SmartApp activity.", audience: ["teacher"] },
+  { title: "Tutorial for teachers (video, step by step)", url: "https://tinyurl.com/Tutorial-for-teachers", category: "SmartApp",
+    desc: "Step-by-step video tutorial for teachers.", audience: ["teacher"] },
+  { title: "Video: Technical & Pedagogical Feature Training to Teacher", url: "https://tinyurl.com/Pedagogical-Feature-Video", category: "SmartApp",
+    desc: "Recording of the feature training.", audience: ["teacher"] },
+  { title: "Video: TFT EA Interactive with TV and Tabs (11 Sep 2025)", url: "https://drive.google.com/file/d/1DaDevXAgoarwfWfYyFkT9hZeP1gsQ_5D/view?usp=sharing", category: "SmartApp",
+    desc: "Recording of the TFT session on EA Interactive with TV and tablets.", audience: ["teacher"] },
+  { title: "Video: SmartApp tablet set-up (Redmi Pad SE 8.7)", url: "https://drive.google.com/file/d/1acuWsmmJDOJDdrbN6b-dKjHg2PPpj7I4/view?usp=sharing", category: "SmartApp",
+    desc: "How to set up the Redmi Pad SE 8.7 tablet for SmartApp.", audience: ["teacher"] },
+  { title: "Video: Remote error / Permission Denied fix", url: "https://docs.google.com/file/d/1vxizA-QPjbMJvsRDslSKli0ghZVDgNZ9/preview", category: "SmartApp",
+    desc: "Step-by-step video from the troubleshooting deck.", audience: ["teacher"] },
+  { title: "Book & EA SmartApp material error report", url: "https://tinyurl.com/Book-SmartApp-Report", category: "SmartApp",
+    desc: "Report an error in a book or SmartApp material.", audience: ["teacher"] },
+  { title: "EA study site (SLMS login)", url: "https://study.english-academy.id/", category: "Tools",
+    desc: "The site students and EAC tablets log in to for SmartApp sessions.", audience: ["teacher"] },
 ];

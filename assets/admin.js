@@ -26,7 +26,7 @@
   /* ----------------------------- checks ----------------------------- */
   function matStatus(r) {
     if (!hasContent(r)) return { id: "waiting", label: "Waiting for file", cls: "soon" };
-    if ((r.type === "gslides" || r.type === "gdrive") && !r.public) return { id: "access", label: "Check access", cls: "started" };
+    if ((r.type === "gslides" || r.type === "gdoc" || r.type === "gdrive") && !r.public) return { id: "access", label: "Check access", cls: "started" };
     return { id: "live", label: "Live", cls: "learned" };
   }
   const srcCounts = (() => {

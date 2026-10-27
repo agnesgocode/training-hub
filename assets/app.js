@@ -3,6 +3,7 @@
 
 const TYPE_LABEL = {
   gslides: "Google Slides",
+  gdoc:    "Google Docs",
   gdrive:  "Google Drive",
   pdf:     "PDF",
   ppt:     "PowerPoint",
@@ -47,7 +48,7 @@ function svg(name, size) {
   const s = size || 20;
   return `<svg class="svg" width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name] || ""}</svg>`;
 }
-const TYPE_ICON = { gslides: "slides", gdrive: "file", pdf: "file", ppt: "slides", link: "link", page: "page" };
+const TYPE_ICON = { gslides: "slides", gdoc: "file", gdrive: "file", pdf: "file", ppt: "slides", link: "link", page: "page" };
 
 /* Switch features on/off. The AI assistant is paused for now: set it to true
    (and load assets/assistant.js on the pages) to bring it back. */
@@ -130,6 +131,10 @@ function toEmbedUrl(type, src) {
   if (type === "gslides") {
     const m = src.match(/presentation\/d\/([a-zA-Z0-9_-]+)/);
     if (m) return `https://docs.google.com/presentation/d/${m[1]}/embed?start=false&loop=false`;
+  }
+  if (type === "gdoc") {
+    const m = src.match(/document\/d\/([a-zA-Z0-9_-]+)/);
+    if (m) return `https://docs.google.com/document/d/${m[1]}/preview`;
   }
   if (type === "gdrive") {
     const m = src.match(/\/d\/([a-zA-Z0-9_-]+)/);
@@ -510,11 +515,12 @@ function renderViewer() {
     paint();
   }
 
-  const isGoogle = r.type === "gslides" || r.type === "gdrive";
+  const isGoogle = r.type === "gslides" || r.type === "gdoc" || r.type === "gdrive";
   const idMatch = (r.src.match(/\/d\/([a-zA-Z0-9_-]+)/) || [])[1];
-  const googleName = r.type === "gslides" ? "Google Slides" : "Google Drive";
+  const googleName = r.type === "gslides" ? "Google Slides" : r.type === "gdoc" ? "Google Docs" : "Google Drive";
   const pdfUrl = !idMatch ? "" : (r.type === "gslides"
     ? `https://docs.google.com/presentation/d/${idMatch}/export/pdf`
+    : r.type === "gdoc" ? `https://docs.google.com/document/d/${idMatch}/export?format=pdf`
     : `https://drive.google.com/uc?export=download&id=${idMatch}`);
 
   if (openExt) {

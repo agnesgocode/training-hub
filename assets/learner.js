@@ -190,7 +190,7 @@ window.Learner = (function () {
       const m = RESOURCES.find(x => x.id === q.material);
       const chip = !ready ? `<span class="lchip soon">Coming soon</span>` : best ? `<span class="lchip ${best.passed ? "learned" : "bad"}">${best.passed ? "Passed" : "Not passed yet"}</span>` : `<span class="lchip new">Not taken</span>`;
       return `<article class="card quiz-card${ready ? "" : " is-soon"}">
-        <div class="card-top"><span class="card-ic">${svg("quiz", 18)}</span>${q.sample ? '<span class="type-tag">Sample</span>' : ""}${chip}</div>
+        <div class="card-top"><span class="card-ic">${svg("quiz", 18)}</span>${q.sample ? '<span class="type-tag">Sample</span>' : q.draft ? '<span class="type-tag">Draft</span>' : ""}${chip}</div>
         <h3>${esc(q.title)}</h3>
         <p>${esc(q.desc || "")}</p>
         <div class="card-foot"><span class="meta">${ready ? `${plural(q.questions.length, "question")} · pass at ${q.passScore}%` : "Waiting for questions"}${m ? " · " + esc(m.title) : ""}</span>
