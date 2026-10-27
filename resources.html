@@ -2,80 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Manage Materials — Training Hub EAC</title>
-  <link rel="icon" type="image/png" href="assets/logo-ea.png">
-  <link rel="stylesheet" href="assets/style.css?v=6">
-  <style>
-    table { width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--line); border-radius:12px; overflow:hidden; }
-    th,td { text-align:left; padding:12px 14px; border-bottom:1px solid var(--line); font-size:.9rem; vertical-align:top; }
-    th { background:var(--navy-soft); font-size:.74rem; text-transform:uppercase; letter-spacing:.4px; color:var(--navy); font-weight:800; }
-    tr:last-child td { border-bottom:none; }
-    .status-ok  { color:var(--navy); font-weight:800; }
-    .status-wait{ color:var(--accent-b); font-weight:800; }
-    .how { background:var(--navy-soft); border-radius:12px; padding:20px 22px; margin-bottom:24px; }
-    .how h3 { margin-top:0; color:var(--navy-dark); }
-    .how code { background:#fff; padding:2px 6px; border-radius:5px; font-size:.85em; }
-    .how ol { padding-left:20px; margin-bottom:8px; }
-  </style>
+  <meta http-equiv="refresh" content="0; url=admin.html">
+  <title>Admin — Training Hub EAC</title>
+  <link rel="canonical" href="admin.html">
 </head>
 <body>
-  <div class="app">
-    <aside class="sidebar no-print" id="sidebar"></aside>
-
-    <div class="content">
-      <div class="panel">
-        <div class="page-head">
-          <h1>Manage Materials</h1>
-          <p>For admins: all training materials and quizzes are managed from files in this project. Change them there and the whole site updates. (To add handy links, use the Resources menu instead.)</p>
-        </div>
-
-        <div class="how">
-          <h3>How to add or change a material</h3>
-          <ol>
-            <li>Open the file <code>data/resources.js</code>.</li>
-            <li><strong>Link, Google Slides or Drive</strong>: paste the URL into the <code>src</code> field. In Google, set sharing to "Anyone with the link can view" and add <code>public: true</code> so it opens directly on the site.</li>
-            <li><strong>PDF/PPT files</strong>: put the file in the <code>files/</code> folder, then set <code>src</code> (for example <code>files/payroll-mt.pdf</code>) and <code>type</code> (<code>"pdf"</code> or <code>"ppt"</code>).</li>
-            <li>Set <code>updated</code> to the date, save, then upload to GitHub.</li>
-          </ol>
-          <p style="margin-bottom:0;color:var(--muted)">A material without a file is automatically marked <span class="status-wait">Waiting for file</span> on the site.</p>
-        </div>
-
-        <table>
-          <caption class="no-print" style="text-align:left;color:var(--muted);font-size:.82rem;padding-bottom:8px">Status of all materials</caption>
-          <thead><tr><th>Material</th><th>Category</th><th>Type</th><th>Status</th><th>Updated</th></tr></thead>
-          <tbody id="res-table"></tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <footer class="site-footer">English Academy Center • Training Hub</footer>
-
-  <script src="data/resources.js?v=6"></script>
-  <script src="assets/app.js?v=6"></script>
-  <script src="assets/shell.js?v=6"></script>
-  <script>
-    (function(){
-      const TL = { gslides:"Google Slides", gdrive:"Google Drive", pdf:"PDF", ppt:"PowerPoint", link:"Link", page:"Web Page" };
-      const tb = document.getElementById("res-table");
-      if (typeof RESOURCES === "undefined" || !Array.isArray(RESOURCES)) {
-        tb.innerHTML = `<tr><td colspan="5">${'⚠️ The materials list failed to load (data/resources.js).'}</td></tr>`;
-        return;
-      }
-      tb.innerHTML = RESOURCES.map(r => {
-        const cat = CATEGORIES.find(c => c.id === r.category);
-        const ready = r.type === "page" || (r.src && r.src.trim());
-        const status = ready ? '<span class="status-ok">✔ Available</span>' : '<span class="status-wait">⏳ Waiting for file</span>';
-        return `<tr>
-          <td><strong>${esc(r.title)}</strong><br><span style="color:var(--muted);font-size:.82rem">${esc(r.desc||"")}</span></td>
-          <td>${esc(cat ? cat.label : r.category)}</td>
-          <td>${esc(TL[r.type]||r.type)}</td>
-          <td>${status}</td>
-          <td>${esc(r.updated || "—")}</td>
-        </tr>`;
-      }).join("");
-    })();
-  </script>
+  <p>This page moved to <a href="admin.html">Admin</a>.</p>
+  <script>location.replace("admin.html");</script>
 </body>
 </html>

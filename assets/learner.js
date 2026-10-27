@@ -247,6 +247,15 @@ window.Learner = (function () {
     return out;
   }
 
+  /* Every link with its origin, duplicates included (the admin page needs to see them). */
+  function rawLinks() {
+    const out = [];
+    (typeof LINKS === "undefined" ? [] : LINKS).forEach(l => out.push({ ...l, origin: "built-in" }));
+    sheet.rows.forEach(l => out.push({ ...l, origin: "shared" }));
+    Store.links().forEach(l => out.push({ ...l, origin: "device" }));
+    return out.map(l => ({ ...l, category: (l.category || "").trim() || "Other" }));
+  }
+
   function resourcesHtml() {
     const links = allLinks();
     const cats = ["All", ...[...new Set(links.map(l => l.category))].sort((a, b) => a.localeCompare(b))];
@@ -325,7 +334,9 @@ window.Learner = (function () {
     }
     refreshResources();
   }
+  const sheetListeners = [];
   function refreshResources() {
+    sheetListeners.forEach(f => { try { f(); } catch (e) {} });
     const s = window.getHomeState && window.getHomeState();
     if (s && !s.q.trim() && s.cat === "all" && s.view === "resources" && window.rerender) window.rerender();
   }
@@ -356,6 +367,7 @@ window.Learner = (function () {
         <label>Your name<input name="name" type="text" maxlength="60" required value="${esc(p.name || "")}" placeholder="e.g. Agnes"></label>
         <label>Your role<select name="role" required>${ROLES.map(r => `<option value="${r.id}"${p.role === r.id ? " selected" : ""}>${esc(r.label)}</option>`).join("")}</select></label>
         <label>Center / branch <span class="opt">(optional)</span><input name="center" type="text" maxlength="60" value="${esc(p.center || "")}" placeholder="e.g. Makassar - Panakkukang"></label>
+        ${first ? "" : `<label class="ck"><input type="checkbox" name="admin"${adminFlag() ? " checked" : ""}> Show the Admin menu <span class="opt">(for Academic Operations)</span></label>`}
         <div class="m-actions">
           ${first ? "" : '<button type="button" class="btn ghost" data-modal-close>Cancel</button>'}
           <button type="submit" class="btn primary">${first ? "Get started" : "Save"}</button>
@@ -430,6 +442,7 @@ window.Learner = (function () {
       } else if (f.id === "profile-form") {
         e.preventDefault();
         Store.setProfile({ name: f.elements.name.value.trim(), role: f.elements.role.value, center: f.elements.center.value.trim() });
+        if (f.elements.admin) { try { f.elements.admin.checked ? localStorage.setItem("hub.admin", "1") : localStorage.removeItem("hub.admin"); } catch (x) {} }
         closeModal(); renderChip(); window.rerender();
       } else if (f.id === "link-form") {
         e.preventDefault();
@@ -472,6 +485,7 @@ window.Learner = (function () {
       }
     },
     after(mode) { if (mode === "resources") loadSheet(false); },
+    rawLinks, loadSheet, sheetState: () => sheet, onSheet: f => sheetListeners.push(f),
     renderChip,
   };
 })();

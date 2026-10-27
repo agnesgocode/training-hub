@@ -29,6 +29,12 @@ function currentPageInfo() {
 function navCollapsed() { try { return localStorage.getItem("hub.nav") === "1"; } catch (e) { return false; } }
 function setNavCollapsed(v) { try { localStorage.setItem("hub.nav", v ? "1" : "0"); } catch (e) {} }
 
+/* Admin mode only decides whether the Admin menu item is shown on this device.
+   It is NOT security: this is a static site and everything the admin page lists is already public. */
+function adminFlag() { try { return localStorage.getItem("hub.admin") === "1"; } catch (e) { return false; } }
+/* Shown automatically on the local dev server, so the person building the site always sees it. */
+function isAdminMode() { return adminFlag() || ["localhost", "127.0.0.1"].includes(location.hostname); }
+
 function renderSidebar() {
   const el = document.getElementById("sidebar");
   if (!el) return;
@@ -62,7 +68,7 @@ function fallbackNav() {
   return l("index.html", "Dashboard") + l("index.html?view=learning", "My Learning") + l("index.html?view=quizzes", "Quizzes") +
     l("index.html?view=results", "My Results") + l("index.html?cat=academic", "Academic") +
     l("index.html?cat=marketing", "Marketing") + l("index.html?cat=administration", "Administration") +
-    l("index.html?view=resources", "Resources") + l("diagnostic.html", "Diagnostic Sheet") + l("resources.html", "Manage Materials");
+    l("index.html?view=resources", "Resources") + l("diagnostic.html", "Diagnostic Sheet");
 }
 
 function sidebarBody() {
@@ -106,7 +112,7 @@ function sidebarBody() {
     ${FEATURES.assistant ? `<button type="button" class="side-link side-btn" data-assistant="1" title="Academic Assistant">
       <span class="ic">${svg("assistant", 20)}</span><span class="side-label">Academic Assistant</span></button>` : ""}
     ${item("diagnostic.html", "diagnostic", "Diagnostic Sheet", info.file === "diagnostic.html")}
-    ${item("resources.html", "settings", "Manage Materials", info.file === "resources.html")}`;
+    ${(isAdminMode() || info.file === "admin.html") ? item("admin.html", "settings", "Admin", info.file === "admin.html") : ""}`;
 }
 
 document.addEventListener("click", e => {
