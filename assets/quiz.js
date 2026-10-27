@@ -5,13 +5,17 @@
   const params = new URLSearchParams(location.search);
   const LETTERS = "ABCDEFGH";
   const BACK = "index.html?view=quizzes";
-  let quiz = null, idx = 0, picked = [], checked = false;
+  let quiz = null, idx = 0, picked = [], checked = false, order = [];
 
   const fail = (title, msg) => {
     root.innerHTML = `<div class="view-body"><div class="quiz-shell"><div class="state"><div class="big">📝</div><div><b>${esc(title)}</b></div><div>${esc(msg)}</div>
       <div class="state-actions"><a class="btn primary small" href="${BACK}">Back to Quizzes</a></div></div></div></div>`;
   };
   const findQuiz = id => (typeof QUIZZES === "undefined" ? [] : QUIZZES).find(q => q.id === id);
+  /* Options are shuffled on every attempt so the position of the right answer never gives it away.
+   `picked` and the saved answers always use the ORIGINAL option index. */
+  const shuffled = n => { const a = [...Array(n).keys()]; for (let i = n - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const newRun = () => { idx = 0; picked = []; checked = false; order = quiz.questions.map(q => shuffled(q.options.length)); };
   const head = (right) => `<a class="back-link" href="${BACK}">← Back to Quizzes</a>${right || ""}`;
 
   /* ---------- intro ---------- */
@@ -34,19 +38,20 @@
         <p class="quiz-tip">After each question you'll see right away whether you were correct, with a short explanation.</p>
         <button type="button" class="btn primary big" id="q-start">${best ? "Retake quiz" : "Start quiz"}</button>
       </div></div></div>`;
-    document.getElementById("q-start").onclick = () => { idx = 0; picked = []; checked = false; question(); };
+    document.getElementById("q-start").onclick = () => { newRun(); question(); };
   }
 
   /* ---------- question ---------- */
   function question() {
     const q = quiz.questions[idx], total = quiz.questions.length;
     const sel = picked[idx];
-    const optHtml = q.options.map((o, i) => {
+    const optHtml = order[idx].map((i, pos) => {
+      const o = q.options[i];
       let cls = "q-opt";
       if (checked) { if (i === q.answer) cls += " right"; else if (i === sel) cls += " wrong"; }
       else if (i === sel) cls += " sel";
       return `<button type="button" class="${cls}" data-o="${i}" ${checked ? "disabled" : ""} role="radio" aria-checked="${i === sel}">
-        <span class="q-let">${LETTERS[i]}</span><span class="q-tx">${esc(o)}</span>
+        <span class="q-let">${LETTERS[pos]}</span><span class="q-tx">${esc(o)}</span>
         ${checked && i === q.answer ? `<span class="q-mark">${svg("check", 18)}</span>` : ""}</button>`;
     }).join("");
     const ok = checked && sel === q.answer;
@@ -96,7 +101,7 @@
         </div>
       </div></div></div>`;
     document.getElementById("q-review").onclick = () => review(a);
-    document.getElementById("q-retake").onclick = () => { idx = 0; picked = []; checked = false; question(); };
+    document.getElementById("q-retake").onclick = () => { newRun(); question(); };
   }
 
   /* ---------- review ---------- */
@@ -106,8 +111,8 @@
       const mine = a.answers[i], ok = mine === q.answer;
       return `<article class="rv ${ok ? "ok" : "bad"}">
         <div class="rv-h"><span class="rv-n">${i + 1}</span><b>${esc(q.q)}</b><span class="lchip ${ok ? "learned" : "bad"}">${ok ? "Correct" : "Incorrect"}</span></div>
-        <p class="rv-a">${mine === undefined ? "<i>No answer</i>" : `<span class="you">Your answer:</span> ${LETTERS[mine]}. ${esc(q.options[mine] || "")}`}</p>
-        ${ok ? "" : `<p class="rv-a good"><span class="you">Correct answer:</span> ${LETTERS[q.answer]}. ${esc(q.options[q.answer])}</p>`}
+        <p class="rv-a">${mine === undefined ? "<i>No answer</i>" : `<span class="you">Your answer:</span> ${esc(q.options[mine] || "")}`}</p>
+        ${ok ? "" : `<p class="rv-a good"><span class="you">Correct answer:</span> ${esc(q.options[q.answer])}</p>`}
         ${q.explain ? `<p class="rv-e">${esc(q.explain)}</p>` : ""}
       </article>`;
     }).join("");
@@ -124,7 +129,7 @@
     if (!quiz || !document.getElementById("q-start") && !root.querySelector(".q-opts")) return;
     if (e.metaKey || e.ctrlKey || e.altKey) return;
     const opts = root.querySelectorAll(".q-opt");
-    if (opts.length && !checked && /^[1-8]$/.test(e.key) && opts[+e.key - 1]) { picked[idx] = +e.key - 1; question(); }
+    if (opts.length && !checked && /^[1-8]$/.test(e.key) && opts[+e.key - 1]) { picked[idx] = +opts[+e.key - 1].dataset.o; question(); }
     else if (e.key === "Enter") {
       const b = document.getElementById("q-next") || document.getElementById("q-check") || document.getElementById("q-start");
       if (b && !b.disabled && document.activeElement === document.body) { e.preventDefault(); b.click(); }
